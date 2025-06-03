@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Login</title>
+        <script type="text/javascript">
+            function doValidate(){
+                
+                let username = document.getElementById("userName").value;
+                let password =  document.getElementById("pword").value;
+
+                if (username ==""){
+                    alert("Enter username");
+                    return false;
+                }
+                if (password ==""){
+                    alert("Enter password");
+                    return false
+                }
+                            
+                 if (password.length < 8) {
+                    alert("Password must be at least 8 characters long");
+                    return false;
+                }
+
+                const hasLowercase = /[a-z]/.test(password);
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasNumber = /[0-9]/.test(password);
+                const hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+                if (!hasLowercase) {
+                    alert("Password must contain at least one lowercase letter");
+                    return false;
+                }
+                if (!hasUppercase) {
+                    alert("Password must contain at least one uppercase letter");
+                    return false;
+                }
+                if(!hasNumber){
+                    alert("Password must contain at least one number");
+                    return false;
+                }
+                if(!hasSpecialChar){
+                    alert("Passord must contain at least one special character");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="doLogin.php" method="POST" onsubmit="return doValidate()">
+            Username <input type="text" id="userName" name="userName"><br><br>
+            Password <input type="password" id="pword" name="pword"><br><br>
+            <input type="submit" value="Login">
+        </form>
+        <a href="">Forgot password?</a>
+        <p>Not a member? <a href="Register.html">Register here</a></p>
+
+    </body>
+</html>
