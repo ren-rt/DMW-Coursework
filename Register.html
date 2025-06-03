@@ -1,11 +1,13 @@
 <html>
     <head>
         <title>Register</title>
+        <link rel="stylesheet" href="registerstyle.css">
         <script type="text/javascript">
             function doValidateRegister() {
                 let firstName = document.getElementById("firstName").value;
                 let lastName = document.getElementById("lastName").value;
                 let gender = document.getElementById("gender").value;
+                let dateOfBirth = document.getElementById("dateOfBirth").value;
                 let contactNo = document.getElementById("contactNo").value;
                 let email = document.getElementById("email").value;
                 let username = document.getElementById("username").value;
@@ -18,6 +20,10 @@
                 }
                 if (username ==""){
                     alert("Enter username");
+                    return false;
+                }
+                if (!dateOfBirth) {
+                    alert("Please enter your Date of Birth");
                     return false;
                 }
                 if (email ==""){
@@ -70,22 +76,66 @@
         </script>
     </head>
     <body>
-        <form action="doSignup.php" method="POST" onsubmit="return doValidateRegister()">
-            First Name <input type="text" id="firstName" name="firstName" required><br><br>
-            Last Name <input type="text" id="lastName" name="lastName" required><br><br>
-            Gender <select id="gender" name="gender" required>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Prefer not to say</option>
-            </select><br><br>
-            Contact No <input type="text" id="contactNo" name="contactNo" required><br><br>
-            Email <input type="text" id="email" name="email" required><br><br>
-            Username <input type="text" id="username" name="username" required><br><br>
-            Password <input type="password" id="password" name="password" required><br><br>
-            Confirm Password <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
-            <input type="submit" value="Register">
-        </form>
-        <p>Already have an account? <a href="login.html">Login here</a></p>
+        <div class="register-container">
+            <div class="logo">
+                <h1>Sign Up</h1>
+            </div>
+            <form id="signupForm" action="doSignup.php" method="POST" onsubmit="return doValidateRegister()">
+                <div class="form-column-group">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                    <div class="form-column-group">
+                    <div class="form-group date-group">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group gender-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-column-group">
+                    <div class="form-group">
+                        <label for="contactNo">Contact No</label>
+                        <input type="text" id="contactNo" name="contactNo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-column-group">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <div id="errorMessage" class="error-message"></div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+            <div class="footer-links">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
     </body>
 </html>
