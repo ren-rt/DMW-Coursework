@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<head>
+    <title> <title>Make an Appointment</title></title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="\bookappointment.js"></script>
+</head>
+
+    <div class="topnav">
+        <a class="image"><img src="images/logo.jpg" width="50" height="50"></a>
+        <a class="active" href="index.html">Home</a>
+        <a class="link" href=".aboutus">About</a>
+        <a class="link" href="#contact">Contact</a>
+    </div>
+     
+    <div class="dashboard">
+    <header>
+        <h1>Make an Appointment</h1>
+    </header>
+        
+     
+
+     <div class="patient-details"
+        <h2><b>Patient Details</b></h2><br><br>
+     </div>
+
+     <div class="patient-container">
+        <form action="index.php" method="POST"></form>
+           Name:<input type="text" class="search-box" placeholder="Enter name" id="name">
+           Age:<input type="text" class="search-box" placeholder="Enter age" id="age">
+           Phone Number:<input type="text" class="search-box"  placeholder="Enter phone number" id="Number">
+           Email:<input type="text" class="search-box"  placeholder="Enter email" id="Email"><br><br>
+     </div>
+    
+     <div class="section">
+        <h2>Find a Doctor</h2>
+        <div class="form-group">
+            <label for="specialization">Specialization:</label>
+            <select id="specialization">
+                <option value="">Select Specialization</option>
+                <option value="1">Cardiology</option>
+                <option value="2">Neurology</option>
+                <option value="3">Pediatrics</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="appointment-date">Appointment Date:</label>
+            <input type="date" id="appointment-date">
+        </div>
+        <button id="search-btn">Search</button>
+        </div>
+
+    
+        <div id="available-doctors" class="doctors-list" style="display: none;">
+            <h2>Available Doctors</h2>
+            <!-- Doctors will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const specializationId = document.getElementById('specialization').value;
+            const date = document.getElementById('appointment-date').value;
+            
+            if (!date) {
+                alert('Please select a date');
+                return;
+            }
+            
+            // Hide previous results
+            const doctorsContainer = document.getElementById('available-doctors');
+            doctorsContainer.style.display = 'none';
+            
+            // Show loading state
+            doctorsContainer.innerHTML = '<p>Loading doctors...</p>';
+            doctorsContainer.style.display = 'block';
+            
+            // Fetch doctors based on selected specialization
+            let url = `api/search_doctors.php?date=${date}`;
+            if (specializationId) {
+                url += `&specialization_id=${specializationId}`;
+            }
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(doctors => {
+                    doctorsContainer.innerHTML = '<h2>Available Doctors</h2>';
+                    
+                    if (doctors.error) {
+                        doctorsContainer.innerHTML += `<p class="error">${doctors.error}</p>`;
+                        return;
+                    }
+                    
+                    if (doctors.length === 0) {
+                        doctorsContainer.innerHTML += '<p>No doctors available for the selected criteria</p>';
+                        return;
+                    }
+                    
+                    doctors.forEach(doctor => {
+                        const card = document.createElement('div');
+                        card.className = 'doctor-card';
+                        card.innerHTML = `
+                            <h3 class="doctor-name">${doctor.doctor_name}</h3>
+                            <p class="doctor-specialization">${getSpecializationName(doctor.specialization)}</p>
+                            <h4 class="time-slots-title">Available Time Slots</h4>
+                            <div class="time-slots" id="slots-${doctor.doctor_id}">
+                                Loading time slots...
+                            </div>
+                            <div class="action-buttons">
+                                <button class="confirm-btn" data-doctor-id="${doctor.doctor_id}">Confirm</button>
+                                <button class="cancel-btn">Cancel</button>
+                            </div>
+                        `;
+                        
+                        doctorsContainer.appendChild(card);
+                        
+                        // Load time slots for this doctor
+                        fetch(`api/get_time_slots.php?doctor_id=${doctor.doctor_id}&date=${date}`)
+                            .then(response => response.json())
+                            .then(slots => {
+                                const slotsContainer = document.getElementById(`slots-${doctor.doctor_id}`);
+                                slotsContainer.innerHTML = '';
+                                
+                                slots.forEach(slot => {
+                                    const slotElement = document.createElement('div');
+                                    slotElement.className = `time-slot ${slot.status}`;
+                                    slotElement.textContent = formatTime(slot.time);
+                                    if (slot.status === 'available') {
+                                        slotElement.addEventListener('click', function() {
+                                            // Remove selection from all slots
+                                            document.querySelectorAll('.time-slot').forEach(s => {
+                                                s.classList.remove('selected');
+                                            });
+                                            // Select this slot
+                                            this.classList.add('selected');
+                                        });
+                                    }
+                                    slotsContainer.appendChild(slotElement);
+                                });
+                            });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    doctorsContainer.innerHTML += `<p class="error">Failed to load doctors. Please try again.</p>`;
+                });
+        });
+        
+        // Helper function to format time (HH:MM to 12-hour format)
+        function formatTime(time24) {
+            const [hours, minutes] = time24.split(':');
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const hours12 = hours % 12 || 12;
+            return `${hours12}:${minutes} ${period}`;
+        }
+        
+        // Helper function to get specialization name
+        function getSpecializationName(specializationId) {
+            const specializations = {
+                1: 'Cardiology',
+                2: 'Neurology',
+                3: 'Pediatrics'
+            };
+            return specializations[specializationId] || 'General Practitioner';
+        }
+        
+        // Handle appointment confirmation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('confirm-btn')) {
+                const doctorId = e.target.getAttribute('data-doctor-id');
+                const card = e.target.closest('.doctor-card');
+                const selectedSlot = card.querySelector('.time-slot.selected');
+                
+                if (!selectedSlot) {
+                    alert('Please select a time slot');
+                    return;
+                }
+                
+                // Get patient details (you would collect these in a real form)
+                const patientData = {
+                    patient_name: "Test Patient", // Replace with form input
+                    patient_age: 30,             // Replace with form input
+                    email: "test@example.com",   // Replace with form input
+                    phoneNo: "1234567890",       // Replace with form input
+                    doctor_id: doctorId,
+                    appointment_date: document.getElementById('appointment-date').value,
+                    time_slot: selectedSlot.textContent.replace(' AM', '').replace(' PM', '') // Convert back to 24h format
+                };
+                
+                fetch('api/create_appointment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(patientData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Appointment booked successfully with Dr. ${card.querySelector('.doctor-name').textContent} at ${selectedSlot.textContent}`);
+                        // Refresh available slots
+                        document.getElementById('search-btn').click();
+                    } else {
+                        alert('Error: ' + (data.error || 'Failed to book appointment'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to book appointment. Please try again.');
+                });
+            }
+            
+            // Handle cancel button
+            if (e.target.classList.contains('cancel-btn')) {
+                const card = e.target.closest('.doctor-card');
+                card.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
