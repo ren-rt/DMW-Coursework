@@ -5,20 +5,26 @@
         <script type="text/javascript">
             function doValidate(){
                 
-                let username = document.getElementById("userName").value;
-                let password =  document.getElementById("pword").value;
+                let username = document.getElementById("username").value;
+                let password =  document.getElementById("password").value;
+                let errorDiv = document.getElementById("errorMessage");
+                errorDiv.style.display = "none";
+                errorDiv.textContent = "";
 
                 if (username ==""){
-                    alert("Enter username");
+                    errorDiv.textContent = "Enter username";
+                    errorDiv.style.display = "block";
                     return false;
                 }
                 if (password ==""){
-                    alert("Enter password");
+                    errorDiv.textContent = "Enter password";
+                    errorDiv.style.display = "block";
                     return false
                 }
                             
                  if (password.length < 8) {
-                    alert("Password must be at least 8 characters long");
+                    errorDiv.textContent = "Password must be at least 8 characters long";
+                    errorDiv.style.display = "block";
                     return false;
                 }
 
@@ -28,32 +34,38 @@
                 const hasSpecialChar = /[!@#$%^&*]/.test(password);
 
                 if (!hasLowercase) {
-                    alert("Password must contain at least one lowercase letter");
+                    errorDiv.textContent = "Password must contain at least one lowercase letter";
+                    errorDiv.style.display = "block";
                     return false;
                 }
                 if (!hasUppercase) {
-                    alert("Password must contain at least one uppercase letter");
+                    errorDiv.textContent = "Password must contain at least one uppercase letter";
+                    errorDiv.style.display = "block";
                     return false;
                 }
                 if(!hasNumber){
-                    alert("Password must contain at least one number");
+                    errorDiv.textContent = "Password must contain at least one number";
+                    errorDiv.style.display = "block";
                     return false;
                 }
                 if(!hasSpecialChar){
-                    alert("Passord must contain at least one special character");
+                    errorDiv.textContent = "Password must contain at least one special character";
+                    errorDiv.style.display = "block";
                     return false;
                 }
                 return true;
             }
         </script>
+        <style>
+        .error-message { color: red; display: none; }
+        </style>
     </head>
     <body>
         <div class="login-container">
         <div class="logo">
-            
             <h1>Login</h1>
         </div>
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="return doValidate();">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -69,6 +81,5 @@
             <a href="#">Forgot password?</a> | <a href="Register.html">Create account</a>
         </div>
     </div>
-
     </body>
 </html>
