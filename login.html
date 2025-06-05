@@ -56,26 +56,29 @@
                 return true;
             }
         </script>
+        <style>
+        .error-message { color: red; display: none; }
+        </style>
     </head>
     <body>
         <div class="login-container">
         <div class="logo">
             <h1>Login</h1>
         </div>
-        <form action="login.php" method="POST">
+        <form id="loginForm" onsubmit="return doValidate();">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="usern">
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="passw">
+                <input type="password" id="password" name="password" required>
                 <div id="errorMessage" class="error-message">Invalid username or password</div>
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
         <div class="footer-links">
-            <a href="register.html">Create account</a>
+            <a href="Register.html">Create account</a>
         </div>
     </div>
     </body>

@@ -1,117 +1,70 @@
-.topnav {
-    background-color: #f7fafc;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(50, 50, 93, 0.04);
-    border-bottom: 1px solid #e6ecf1;
-}
+
+.topnav
+     {
+      background-color: #f7fafc;
+      overflow: hidden;
+      
+     }
 
 .topnav a {
-    float: none;
+    float:left;
     color: #32325d;
     text-align: center;
+    
     text-decoration: none;
     font-size: 17px;
-    vertical-align: middle;
-    transition: background-color 0.2s, color 0.2s;
-    border-radius: 4px 4px 0 0;
-    display: inline-block;
-    height: 54px;
-    padding: 0 20px;
-}
+    vertical-align:middle;
 
-.topnav a.link {
-    padding: 0 20px;
-}
+       }
+.topnav a:hover {
+    background-color: #75d5e6;
+    color: black;
+       }
 
-.topnav a.image {
-    padding: 0px;
-    height: 54px;
-    display: flex;
-    align-items: center;
-}
-
-.topnav a.active {
-    background-color: #5e72e4;
-    color: #fff;
-    font-weight: 600;
-}
-
-.topnav a:hover,
-.topnav a.right:hover {
-    background-color: #11cdef;
-    color: #000;
-}
-
-.topnav a.right {
-    float: right;
-    color: #32325d;
-    text-align: center;
-    padding: 0 20px;
-    font-size: 17px;
-    vertical-align: middle;
-    height: 54px;
-    line-height: 54px;
-}
-
+.topnav a.active
+     {
+    color: rgb(0, 0, 0);
+    padding: 16px 20px;
+       }
+ .topnav a.link
+     {
+      padding: 16px 20px;
+     }
+ .topnav a.image
+     {
+      padding: 0px;
+     }
+        
+       /* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
-    background-color: #f7fafc;
-    color: #32325d;
+    background-color: #f5f7fa;
+    color: #333;
     line-height: 1.6;
     padding: 20px;
 }
 
-.container, .dashboard {
+.container {
     max-width: 1000px;
     margin: 0 auto;
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(94, 114, 228, 0.08);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3 {
-    color: #5e72e4;
+    color: #2c3e50;
     margin-bottom: 20px;
 }
 
-h2 {
-    font-size: 1.3em;
-    letter-spacing: 0.5px;
-}
-
-header h1 {
-    color: #5e72e4;
-    margin-bottom: 24px;
-}
-
-.patient-details h2 {
-    color: #5e72e4;
-}
-
-.patient-container input[type="text"],
-.patient-container input[type="email"],
-.patient-container input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #d1d9e6;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-bottom: 16px;
-    transition: border 0.3s;
-}
-
-.patient-container input:focus {
-    outline: none;
-    border-color: #5e72e4;
-}
-
+/* Form Styles */
 .search-form {
     display: flex;
     gap: 15px;
@@ -128,33 +81,26 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #32325d;
+    color: #2c3e50;
 }
 
-select,
-input[type="date"],
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="tel"] {
+select, input[type="date"], input[type="text"], input[type="number"], input[type="email"], input[type="tel"] {
     width: 100%;
     padding: 12px;
-    border: 1px solid #d1d9e6;
+    border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
     transition: border 0.3s;
 }
 
-select:focus,
-input:focus {
+select:focus, input:focus {
     outline: none;
-    border-color: #5e72e4;
+    border-color: #3498db;
 }
 
-/* Buttons */
-button, .confirm-btn, .cancel-btn {
-    background-color: #5e72e4;
-    color: #fff;
+button {
+    background-color: #3498db;
+    color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 6px;
@@ -166,18 +112,8 @@ button, .confirm-btn, .cancel-btn {
     height: 46px;
 }
 
-button:hover, .confirm-btn:hover {
-    background-color: #11cdef;
-    color: #000;
-}
-
-.cancel-btn {
-    background-color: #e74c3c;
-}
-
-.cancel-btn:hover {
-    background-color: #c0392b;
-    color: #fff;
+button:hover {
+    background-color: #2980b9;
 }
 
 /* Doctors List */
@@ -186,22 +122,22 @@ button:hover, .confirm-btn:hover {
 }
 
 .doctor-card {
-    background: #fff;
+    background: white;
     border-radius: 8px;
     padding: 25px;
     margin-bottom: 25px;
-    box-shadow: 0 3px 10px rgba(94, 114, 228, 0.09);
-    border-left: 4px solid #5e72e4;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3498db;
 }
 
 .doctor-name {
     font-size: 22px;
-    color: #5e72e4;
+    color: #2c3e50;
     margin-bottom: 5px;
 }
 
 .doctor-specialization {
-    color: #11cdef;
+    color: #7f8c8d;
     margin-bottom: 20px;
     font-style: italic;
 }
@@ -209,7 +145,6 @@ button:hover, .confirm-btn:hover {
 .time-slots-title {
     margin: 15px 0 10px;
     font-size: 18px;
-    color: #5e72e4;
 }
 
 .time-slots {
@@ -228,15 +163,13 @@ button:hover, .confirm-btn:hover {
 }
 
 .time-slot.available {
-    background-color: #e3f2fd;
-    color: #5e72e4;
-    border: 1px solid #5e72e4;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
 .time-slot.available:hover {
-    background-color: #11cdef;
-    color: #000;
-    border: 1px solid #11cdef;
+    background-color: #c3e6cb;
 }
 
 .time-slot.booked {
@@ -247,9 +180,9 @@ button:hover, .confirm-btn:hover {
 }
 
 .time-slot.selected {
-    background-color: #5e72e4;
+    background-color: #3498db;
     color: white;
-    border-color: #11cdef;
+    border-color: #2980b9;
 }
 
 .action-buttons {
@@ -259,11 +192,34 @@ button:hover, .confirm-btn:hover {
 }
 
 .confirm-btn {
-    background-color: #11cdef;
-    color: #32325d;
+    background-color: #2ecc71;
 }
 
 .confirm-btn:hover {
-    background-color: #5e72e4;
-    color: #fff;
+    background-color: #27ae60;
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+    }
+    
+    .time-slot {
+        padding: 10px 15px;
+        flex-grow: 1;
+        text-align: center;
+    }
 }
