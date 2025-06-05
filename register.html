@@ -1,95 +1,191 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Register</title>
-        <link rel="stylesheet" href="registerstyle.css">
-        <script type="text/javascript">
-            function doValidateRegister() {
-                let firstName = document.getElementById("firstName").value;
-                let lastName = document.getElementById("lastName").value;
-                let gender = document.getElementById("gender").value;
-                let contactNo = document.getElementById("contactNo").value;
-                let email = document.getElementById("email").value;
-                let username = document.getElementById("username").value;
-                let password = document.getElementById("password").value;
-                let confirmPassword = document.getElementById("confirmPassword").value;
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="registerstyle.css">
+    <script type="text/javascript">
+        function doValidateRegister() {
+            let firstName = document.getElementById("firstName").value.trim();
+            let lastName = document.getElementById("lastName").value.trim();
+            let gender = document.getElementById("gender").value;
+            let dateOfBirth = document.getElementById("dateOfBirth").value;
+            let contactNo = document.getElementById("contactNo").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let errorDiv = document.getElementById("errorMessage");
+            errorDiv.style.display = "none";
+            errorDiv.textContent = "";
 
-                if (firstName ==""){
-                    alert("Enter First Name");
-                    return false;
-                }
-                if (username ==""){
-                    alert("Enter username");
-                    return false;
-                }
-                if (email ==""){
-                    alert("Enter email");
-                    return false;
-                }
-                const hasLowercase = /[a-z]/.test(password);
-                const hasUppercase = /[A-Z]/.test(password);
-                const hasNumber = /[0-9]/.test(password);
-                const hasSpecialChar = /[!@#$%^&*]/.test(password);
-
-                if (!hasLowercase) {
-                    alert("Password must contain at least one lowercase letter");
-                    return false;
-                }
-                if (!hasUppercase) {
-                    alert("Password must contain at least one uppercase letter");
-                    return false;
-                }
-                if(!hasNumber){
-                    alert("Password must contain at least one number");
-                    return false;
-                }
-                if(!hasSpecialChar){
-                    alert("Passord must contain at least one special character");
-                    return false;
-                }
-                if (password ==""){
-                    alert("Enter password");
-                    return false;
-                }
-                if (password.length < 8) {
-                    alert("Password must be at least 8 characters long");
-                    return false;
-                }
-                if (confirmPassword ==""){
-                    alert("Re-Enter password");
-                    return false;
-                }
-                if (password != confirmPassword) {
-                    alert("Passwords do not match");
-                    return false;
-                }
-                if (contactNo ==""){
-                    alert("Enter username");
-                    return false;
-                }
-                return true;
+            if (!firstName) {
+                errorDiv.textContent = "Enter First Name";
+                errorDiv.style.display = "block";
+                return false;
             }
-        </script>
-    </head>
-    <body>
-        <h1> Sign Up </h1>
-        <br>
-        <br> 
-        <form action="doSignup.php" method="POST" onsubmit="return doValidateRegister()">
-            First Name <input type="text" id="firstName" name="firstName" required><br><br>
-            Last Name <input type="text" id="lastName" name="lastName" required><br><br>
-            Gender <select id="gender" name="gender" required>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Prefer not to say</option>
-            </select><br><br>
-            Contact No <input type="text" id="contactNo" name="contactNo" required><br><br>
-            Email <input type="text" id="email" name="email" required><br><br>
-            Username <input type="text" id="username" name="username" required><br><br>
-            Password <input type="password" id="password" name="password" required><br><br>
-            Confirm Password <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
-            <input type="submit" value="Register">
+            if (!lastName) {
+                errorDiv.textContent = "Enter Last Name";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!gender) {
+                errorDiv.textContent = "Select Gender";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!dateOfBirth) {
+                errorDiv.textContent = "Please enter your Date of Birth";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!contactNo) {
+                errorDiv.textContent = "Enter contact number";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            // Optional: Simple contact number check (digits only, min 7 max 15)
+            if (!/^\d{7,15}$/.test(contactNo)) {
+                errorDiv.textContent = "Enter a valid contact number (7-15 digits)";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!email) {
+                errorDiv.textContent = "Enter email";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            // Optional: Simple email format check
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                errorDiv.textContent = "Enter a valid email address";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!username) {
+                errorDiv.textContent = "Enter username";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!password) {
+                errorDiv.textContent = "Enter password";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (password.length < 8) {
+                errorDiv.textContent = "Password must be at least 8 characters long";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            const hasLowercase = /[a-z]/.test(password);
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+            if (!hasLowercase) {
+                errorDiv.textContent = "Password must contain at least one lowercase letter";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!hasUppercase) {
+                errorDiv.textContent = "Password must contain at least one uppercase letter";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!hasNumber) {
+                errorDiv.textContent = "Password must contain at least one number";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!hasSpecialChar) {
+                errorDiv.textContent = "Password must contain at least one special character";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (!confirmPassword) {
+                errorDiv.textContent = "Re-Enter password";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            if (password !== confirmPassword) {
+                errorDiv.textContent = "Passwords do not match";
+                errorDiv.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <style>
+        .error-message { color: #e74c3c; font-size: 14px; margin-top: 5px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo">
+            <h1>Sign Up</h1>
+        </div>
+        <form id="signupForm" action="doSignup.php" method="POST" onsubmit="return doValidateRegister()">
+            <div class="form-column-group">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+            <div class="form-column-group">
+                <div class="form-group date-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                </div>
+                <div class="form-group gender-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-column-group">
+                <div class="form-group">
+                    <label for="contactNo">Contact No</label>
+                    <input type="text" id="contactNo" name="contactNo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-column-group">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div id="errorMessage" class="error-message"></div>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
         </form>
-        <p>Already have an account? <a href="login.html">Login here</a></p>
-    </body>
+        <div class="footer-links">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+</body>
 </html>

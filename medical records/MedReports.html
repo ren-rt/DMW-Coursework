@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Medical Reports</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <!--Main container-->
+            <div class="container">         
+                <h1>Medical Reports</h1>
+
+                <!--Select user role-->
+                <form id="search">
+                <div class="selectRole">
+                    <select id="userRole" name="role" required>
+                        <option value="selectRole" disabled selected>Select User</option>       <!--keeps the select role selected and disabled when page loaded and forces user to select from the options-->
+                        <option value="doctor">Doctor</option>
+                        <option value="patient">Patient</option>
+                    </select>
+                </div>
+
+
+                <!--Search Records-->
+                
+                    <input type="text" id="searchInput" name="patientID" placeholder="Enter Patient ID">
+                    <button id="searchBtn" type="submit">Search</button>                   <!--if form is not used you have to use javascript and a function(onclick)-->
+                </form>
+
+                <!--Record display-->
+                <div id="recordDisplay"></div>
+
+                <!--Insert records-->
+                <div class="insertForm" id="insertForm" style="display: none;">
+                    <h2>Insert Patient Record</h2>
+                    <form id="record" action="Insert.php" method="post">
+                        <input type="text" name="patientID" placeholder="Patient ID" required><br>
+                        <input type="text" name="name" placeholder="Patient Name" required><br>
+                        <input type="text" name="diagnosis" placeholder="Diagnosis" required><br>
+                        <input type="text" name="treatment" placeholder="Treatment" required><br>
+                        <input type="date" name="date" required><br>
+                        <input type="text" name="doctor" placeholder="Doctor Name" required><br>
+                        <button type="submit">Insert Record</button>
+                        
+                    </form>
+
+                </div>
+
+            </div>
+            <script src="script.js"></script>
+        </body>
+    
+</html>

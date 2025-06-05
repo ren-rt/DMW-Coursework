@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prescription Management</title>
+    <link rel="stylesheet" href="prescription.css">
+    <script src="prescription.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Patient Search Form -->
+        <div class="patient">
+            <h1>Prescription Management</h1><br>
+            <form id="details" method="POST" action="view.php">
+                <label>Patient Name: </label>
+                <input type="text" name="name" placeholder="Enter patient Name" required><br>
+                <button type="submit" id="viewButton">VIEW</button>
+            </form>
+        </div>
+        <!-- Insert records -->
+        <div class="insertForm" id="insertForm" style="display: none;">
+            <h2>Insert Patient Record</h2>
+            <form id="record" action="insert.php" method="post">
+                <input type="text" name="name" placeholder="Patient Name" required><br>
+                <input type="text" name="diagnosis" placeholder="Diagnosis" required><br>
+                <input type="text" name="treatment" placeholder="Treatment" required><br>
+                <input type="date" name="date" required><br>
+                <input type="text" name="doctor" placeholder="Doctor Name" required><br>
+                <button type="submit">Insert Record</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

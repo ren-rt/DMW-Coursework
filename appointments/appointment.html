@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Make Appointment</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">         <!--Main container-->
+            
+
+            <form id="details" method="POST" action="doctor.php">
+                <div class="patient">
+                <h1>Patient Details</h1>
+                <label>Name: </label><br>
+                <br>
+                <input type="text" name="name" placeholder="Enter your name" required><br>
+                <label>Age: </label><br>
+                <br>
+                <input type="number" name="age" placeholder="Enter your age" required><br>
+                <label>Phone Number: </label><br>
+                <br>
+                <input type="tel" name="pno" placeholder="Enter your phone number" required><br>
+                <label>Email: </label><br>
+                <br>
+                <input type="email" name="email" placeholder="Enter your E-mail" required><br>
+                <label>Appointment Date</label>
+                <input type="date" name="date"><br>
+                <br>
+
+
+                <label>Specialization</label>
+                <select id="doctorOptions" required>
+                        <option value="selectType" disabled selected>Select</option>       <!--keeps the select role selected and disabled when page loaded and forces user to select from the options-->
+                        <option value="neurology">Neurology</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="oncology">Oncology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                </select>
+                
+                <button id="searchBtn" type="button">Search</button>
+                    <br><br>
+
+            </form>
+            <?php
+            
+            ?>
+                
+                
+                <form id="searchDoctor">  
+                <div class="doctor" style="display: none;">   
+                <h1>Find a Doctor</h1>
+                <label>Specialization</label>
+                <select id="doctorOptions" required>
+                        <option value="selectType" disabled selected>Select</option>       
+                        <option value="neurology">Neurology</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="oncology">Oncology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                    </select>
+                    
+                    <!-- ...existing code... -->
+                    
+
+                    
+                    <div id="doctorResults"></div>
+
+                    </div> 
+
+                    </form>
+
+            
+
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

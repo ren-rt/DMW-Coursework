@@ -1,0 +1,80 @@
+
+body{
+    background-color:aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;       
+    padding: 20px;
+}
+
+h1{
+    text-align: left;
+    margin-bottom: 40px;
+    font-size: 40px;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.container{
+    background-color:aliceblue; 
+    margin: auto;
+    padding: 50px;
+    max-width: 80%;
+    min-height: auto; 
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); 
+}
+.patient{
+    background-color:white; 
+    margin: auto;
+    padding: 50px;
+    margin-top: 50px;
+    padding-top: 10px;
+    max-width: 100%;
+    min-height: 100%; 
+    border-radius: 20px;
+}
+
+.patient input{
+   display: flex;
+    align-items: center;
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-left: 20px;
+    gap: 30px;
+    background-color:#f3f8fc ;
+}
+.patient button{
+    background-color: #3498db;
+    width: 250px;
+    height: 60px;
+    border-radius: 10px;
+    border-width: 1px;
+    margin-left: 400px;
+    margin-top: 40px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin: 40px;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f7f9fc;
+}
