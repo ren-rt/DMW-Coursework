@@ -1,95 +1,134 @@
-.topnav
-{
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7fafc;
+    color: #32325d;
+    margin: 0;
+    padding: 0;
+}
+
+.topnav {
     background-color: #f7fafc;
     overflow: hidden;
+    box-shadow: 0 2px 6px rgba(50, 50, 93, 0.04);
+    border-bottom: 1px solid #e6ecf1;
 }
 
 .topnav a {
-  float:left;
-  color: #32325d;
-  text-align: center;
-  
-  text-decoration: none;
-  font-size: 17px;
-  vertical-align:middle;
-
+    float: left;
+    color: #32325d;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    vertical-align: middle;
+    line-height: 54px;
+    padding: 0 20px;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 4px 4px 0 0;
+    display: inline-block;
+    height: 54px;
 }
 
-.topnav a:hover {
-  background-color: #75d5e6;
-  color: black;
+.topnav a.link {
+    padding: 0 20px;
+}
+
+.topnav a.image {
+    padding: 0;
+    height: 54px;
+    display: flex;
+    align-items: center;
+}
+
+.topnav a.right {
+    float: right;
+    color: #32325d;
+    text-align: center;
+    padding: 0 20px;
+    text-decoration: none;
+    font-size: 17px;
+    vertical-align: middle;
+    line-height: 54px;
+    height: 54px;
 }
 
 .topnav a.active {
-  
-  color: rgb(0, 0, 0);
-  padding: 16px 20px;
-}
-.topnav a.link
-{
-    padding: 16px 20px;
-}
-.topnav a.image
-{
-    padding: 0px;
-}
-.topnav a.right
-{
-    float:right;
-    color: #32325d;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    vertical-align:middle;
-}
-.topnav a.right:hover
-{
-    background-color: #94d8e4;
-    color: black;
-}
-.aboutus pre, .contactus pre
-{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #5e72e4;
+    color: #fff;
+    font-weight: 600;
 }
 
-.footer
-{
-    background-color: #94d8e4;
-    text-align: center;
-  
-  position: fixed;      /* Sticks the footer to the bottom */
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  font-size: 16px;
+.topnav a:hover {
+    background-color: #11cdef;
+    color: #000;
 }
+
+.topnav a.right:hover {
+    background-color: #11cdef;
+    color: #000;
+}
+
+.aboutus pre,
+.contactus pre {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7fafc;
+    padding: 18px 24px;
+    border-radius: 6px;
+    margin: 18px 0;
+    font-size: 1em;
+    color: #32325d;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
 .card-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 40px auto;
-      max-width: 1500px;
-      flex-wrap: wrap;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      padding: 30px 20px;
-      width: 250px;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-    
-    
-    .card-title {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #023e8a;
-    }
-    .card-desc {
-      color: #555;
-      font-size: 1em;
-    }
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto 100px auto;
+    max-width: 1500px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e3e8ee;
+}
+
+.card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(17,205,239,0.15);
+    border-color: #11cdef;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #5e72e4;
+    letter-spacing: 0.5px;
+}
+
+.card-desc {
+    color: #32325d;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #5e72e4;
+    color: #f7fafc;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    font-size: 16px;
+    padding: 8px 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    z-index: 100;
+}
